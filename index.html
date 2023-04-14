@@ -93,6 +93,9 @@
 				link.setAttribute('target', '_blank');
 				link.setAttribute('download', name);
 
+				// add link
+				document.body.appendChild(link);
+
 				// click said link
 				link.click();
 			}
