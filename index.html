@@ -127,9 +127,9 @@
 
           document
             .querySelector("#updateButton")
-            .addEventListener("click", async () => {
-              await AHDownloadText(githubSrc, "Archimedes.html");
-            });
+            .onclick = async () => {
+              await AHDownloadText(githubSRC, "Archimedes.html");
+            };
         }
 
         AUCheckForUpdates();
