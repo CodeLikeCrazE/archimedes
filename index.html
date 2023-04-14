@@ -39,6 +39,11 @@
 
 		<!--Helper Functions-->
 		<script type="text/javascript">
+			// Hook errors
+			window.onerror = (error) => {
+				alert(`It looks like we ran into an error! :(\n${error.toString()}`);
+			}
+
 			// Asynchronously fetches the text from a given url
 			async function AHFetchText(url) {
 				console.log(`/archimedes/helpers ::: Downloading URL ${url}`);
