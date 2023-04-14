@@ -24,6 +24,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Archimedes</title>
 
+	<!--Stylesheets-->
+	<style>
+		html, body {
+			padding: 0;
+			margin: 0;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			padding: 50px;
+			color: #222222;
+			background-color: #dddddd;
+		}
+	</style>
+
 	<!--Source Code-->
 	<source-code>
 		<!--Configuration-->
@@ -62,9 +77,18 @@
 
 			// Downloads a text file to the users PC.
 			async function AHDownloadText(text,name="output.txt") {
-				alert("FIXME: AHDownloadText is not implemented yet!\nAborting!");
-				
-				throw new Error("Not implemented");
+				// create a blob
+				const blob = new Blob()
+
+				// make url
+				const url = URL.createObjectURL(blob);
+
+				// construct a link that we pretend to click
+				const link = document.createElement("p");
+				link.href = url;
+
+				// click said link
+				link.click();
 			}
 
 			// Normalizes the formatting of a file, for diffing purposes
@@ -78,24 +102,12 @@
 			async function AUCheckForUpdates() {
 				console.log(`/archimedes/update ::: Checking for updates`);
 
-				const refreshToken = Math.random().toString().split(".").join("");
-
-				console.log(`/archimedes/update ::: Downloading source of self.`);
-				const mySRC = new XMLSerializer().serializeToString(document);
-
 				console.log(`/archimedes/update ::: Downloading source from online.`);
 				const githubSRC = await AHFetchText(config.updateURL);
 
-				console.log(`/archimedes/update ::: Source download complete`);
-
-				alert(mySRC);
-				alert(githubSRC);
-
-				if (AHNormalizeFormatting(mySRC) != AHNormalizeFormatting(githubSRC)) {
-					console.log(`/archimedes/update ::: Informing user of reccomended update`);
-				
-					alert("Update is reccomended!");
-				}
+				document.querySelector("#updateButton").addEventListener("click",async ()=>{
+					await AHDownloadText(githubSrc,"Archimedes.html");
+				});
 			}
 
 			AUCheckForUpdates();
@@ -104,5 +116,7 @@
 </head>
 <body>
 	<h1>Archimedes</h1>
+	<h2>Your go-to place for chromebook hacking news.</h2>
+	<button id="updateButton">Update</button>
 </body>
 </html>
