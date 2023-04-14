@@ -80,33 +80,14 @@
         }
 
         // Downloads a text file to the users PC.
-        async function AHDownloadText(text, name = "output.txt") {
-          try {
-            console.log(`/archimedes/helpers ::: Saving file`);
-
-            // create a blob
-            const blob = new Blob([text], { type: 'text/plain' })
-            // make url
-            const url = URL.createObjectURL(blob);
-
-            // construct a link that we pretend to click
-            const link = document.createElement("p");
-            link.href = url;
-            link.setAttribute("target", "_blank");
-            link.setAttribute("download", name);
-
-            // add link
-            document.body.appendChild(link);
-
-            // click said link
-            link.click();
-          } catch (error) {
-            alert(
-              `Darn :(\nWe couldn't save the file because "${error.toString()}"`
-            );
-            throw new Error(":(");
-          }
-        }
+        const AHDownloadText = (content, name = "output.txt") => {
+          const link = document.createElement("a");
+          const file = new Blob([content], { type: "text/plain" });
+          link.href = URL.createObjectURL(file);
+          link.download = name;
+          link.click();
+          URL.revokeObjectURL(link.href);
+        };
 
         // Normalizes the formatting of a file, for diffing purposes
         function AHNormalizeFormatting(file) {
@@ -124,11 +105,9 @@
           console.log(`/archimedes/update ::: Downloading source from online.`);
           const githubSRC = await AHFetchText(config.updateURL);
 
-          document
-            .querySelector("#updateButton")
-            .onclick = async () => {
-              await AHDownloadText(githubSRC, "Archimedes.html");
-            };
+          document.querySelector("#updateButton").onclick = async () => {
+            AHDownloadText(githubSRC, "Archimedes.html");
+          };
         }
 
         AUCheckForUpdates();
