@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<!--
+    	_             _     _                    _
+	   / \   _ __ ___| |__ (_)_ __ ___   ___  __| | ___ ___
+	  / _ \ | '__/ __| '_ \| | '_ ` _ \ / _ \/ _` |/ _ / __|
+	 / ___ \| | | (__| | | | | | | | | |  __| (_| |  __\__ \
+	/_/   \_|_|  \___|_| |_|_|_| |_| |_|\___|\__,_|\___|___/	
+
+	Archimedes is a free website designed to help you learn about hacking chromebooks.
+
+	Scam Warning
+	
+	Archimedes is Free and Open Source Software (FOSS).
+	Anybody claiming that you must use money to use Archimedes is 200% scamming you!
+	Some exploits that Archimedes may tell you about may cost money, but they are explicity indicated.
+-->
+
+<html lang="en">
+<head>
+	<!--Required header junk-->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Archimedes</title>
+
+	<!--Source Code-->
+	<source-code>
+		<!--Configuration-->
+		<script type="text/javascript">
+			console.log(`/archimedes/config ::: Loading config`);
+
+			const config = {
+				updateURL:"https://codelikecraze.github.io/archimedes/index.html"
+			};
+
+			window.config = config;
+		</script>
+
+		<!--Helper Functions-->
+		<script type="text/javascript">
+			// Asynchronously fetches the text from a given url
+			async function AHFetchText(url) {
+				console.log(`/archimedes/helpers ::: Downloading URL ${url}`);
+			}
+		</script>
+
+		<!--Update Mechanism-->
+		<script type="text/javascript">
+			async function AUCheckForUpdates() {
+				console.log(`/archimedes/update ::: Checking for updates`);
+
+				console.log(`/archimedes/update ::: Downloading source of self.`);
+				const mySRC = await AHFetchText(".");
+
+				console.log(`/archimedes/update ::: Downloading source from online.`);
+				const githubSRC = await AHFetchText(config.updateURL);
+
+				console.log(`/archimedes/update ::: Source download complete`);
+
+				alert(mySRC);
+				alert(githubSRC);
+
+				if (mySRC != githubSRC) {
+					console.log(`/archimedes/update ::: Informing user of reccomended update`);
+				
+					alert("Update is reccomended!");
+				}
+			}
+
+			AUCheckForUpdates();
+		</script>
+	</source-code>
+</head>
+<body>
+	<h1>Archimedes</h1>
+</body>
+</html>
