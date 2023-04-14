@@ -81,7 +81,7 @@
 				const refreshToken = Math.random().toString().split(".").join("");
 
 				console.log(`/archimedes/update ::: Downloading source of self.`);
-				const mySRC = document.body.outerHTML;
+				const mySRC = document.all[0].outerHTML;
 
 				console.log(`/archimedes/update ::: Downloading source from online.`);
 				const githubSRC = await AHFetchText(config.updateURL);
