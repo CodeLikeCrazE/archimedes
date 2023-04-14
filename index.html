@@ -85,7 +85,7 @@
             console.log(`/archimedes/helpers ::: Saving file`);
 
             // create a blob
-            const blob = new Blob();
+            const blob = new Blob(text);
 
             // make url
             const url = URL.createObjectURL(blob);
