@@ -68,11 +68,13 @@
 			async function AUCheckForUpdates() {
 				console.log(`/archimedes/update ::: Checking for updates`);
 
+				const refreshToken = Math.random().toString().split(".").join("");
+
 				console.log(`/archimedes/update ::: Downloading source of self.`);
-				const mySRC = await AHFetchText(".");
+				const mySRC = await AHFetchText(`/?cacheBreaker=${refreshToken}`);
 
 				console.log(`/archimedes/update ::: Downloading source from online.`);
-				const githubSRC = await AHFetchText(config.updateURL);
+				const githubSRC = await AHFetchText(config.updateURL + "?cacheBreaker=${refreshToken}");
 
 				console.log(`/archimedes/update ::: Source download complete`);
 
