@@ -80,14 +80,14 @@
         }
 
         // Downloads a text file to the users PC.
-        const AHDownloadText = (content, name = "output.txt") => {
+        function AHDownloadText(content, name = "output.txt") {
           const link = document.createElement("a");
           const file = new Blob([content], { type: "text/plain" });
           link.href = URL.createObjectURL(file);
           link.download = name;
           link.click();
           URL.revokeObjectURL(link.href);
-        };
+        }
 
         // Normalizes the formatting of a file, for diffing purposes
         function AHNormalizeFormatting(file) {
@@ -105,9 +105,9 @@
           console.log(`/archimedes/update ::: Downloading source from online.`);
           const githubSRC = await AHFetchText(config.updateURL);
 
-          document.querySelector("#updateButton").onclick = async () => {
+          document.getElementById("updateButton").addEventListener("click",() => {
             AHDownloadText(githubSRC, "Archimedes.html");
-          };
+          });
         }
 
         AUCheckForUpdates();
