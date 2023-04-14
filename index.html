@@ -42,7 +42,7 @@
     <!--Source Code-->
     <source-code>
       <!--Configuration-->
-      <script type="text/javascript">
+      <script>
         console.log(`/archimedes/config ::: Loading config`);
 
         const config = {
@@ -53,7 +53,7 @@
       </script>
 
       <!--Helper Functions-->
-      <script type="text/javascript">
+      <script>
         // Hook errors
         window.onerror = (error) => {
           alert(`It looks like we ran into an error! :(\n${error.toString()}`);
@@ -98,7 +98,7 @@
       </script>
 
       <!--Update Mechanism-->
-      <script type="text/javascript">
+      <script>
         async function AUCheckForUpdates() {
           console.log(`/archimedes/update ::: Checking for updates`);
 
@@ -113,7 +113,7 @@
       </script>
 
 	  <!--Main execution flow-->
-	  <script type="text/javascript">
+	  <script>
 		document.addEventListener('DOMContentLoaded',async () => {
 			await AUCheckForUpdates();
 		});
