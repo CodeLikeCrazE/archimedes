@@ -46,13 +46,18 @@
 
 			// Asynchronously fetches the text from a given url
 			async function AHFetchText(url) {
-				console.log(`/archimedes/helpers ::: Downloading URL ${url}`);
+				try {
+					console.log(`/archimedes/helpers ::: Downloading URL ${url}`);
 			
-				const response = await fetch(url, {cache: "reload"});
+					const response = await fetch(url, {cache: "reload"});
 
-				const responseAsText = await response.text();
+					const responseAsText = await response.text();
 
-				return responseAsText;
+					return responseAsText;
+				} catch {
+					alert(`Darn :(\nIt looks like we couldn't download the url "${url}"`);
+					throw new Error(":(");
+				}
 			}
 
 			// Downloads a text file to the users PC.
