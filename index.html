@@ -105,6 +105,7 @@
           console.log(`/archimedes/update ::: Downloading source from online.`);
           const githubSRC = await AHFetchText(config.updateURL);
 
+		  console.log(`/archimedes/update ::: Hooking click.`);
           document.getElementById("updateButton").addEventListener("click",() => {
             AHDownloadText(githubSRC, "Archimedes.html");
           });
@@ -113,9 +114,9 @@
 
 	  <!--Main execution flow-->
 	  <script type="text/javascript">
-		window.onload = async () => {
+		window.addEventListener("DOMContentLoaded",async () => {
 			await AUCheckForUpdates();
-		}
+		});
 	  </script>
     </source-code>
   </head>
