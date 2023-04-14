@@ -109,9 +109,14 @@
             AHDownloadText(githubSRC, "Archimedes.html");
           });
         }
-
-        AUCheckForUpdates();
       </script>
+
+	  <!--Main execution flow-->
+	  <script type="text/javascript">
+		window.onload = async () => {
+			await AUCheckForUpdates();
+		}
+	  </script>
     </source-code>
   </head>
   <body>
