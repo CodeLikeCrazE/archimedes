@@ -59,6 +59,8 @@
 				alert(`It looks like we ran into an error! :(\n${error.toString()}`);
 			}
 
+			console.log = alert;
+
 			// Asynchronously fetches the text from a given url
 			async function AHFetchText(url) {
 				try {
@@ -77,6 +79,8 @@
 
 			// Downloads a text file to the users PC.
 			async function AHDownloadText(text,name="output.txt") {
+				console.log(`/archimedes/helpers ::: Saving file`);
+		
 				// create a blob
 				const blob = new Blob()
 
@@ -86,6 +90,8 @@
 				// construct a link that we pretend to click
 				const link = document.createElement("p");
 				link.href = url;
+				link.setAttribute('target', '_blank');
+				link.setAttribute('download', name);
 
 				// click said link
 				link.click();
