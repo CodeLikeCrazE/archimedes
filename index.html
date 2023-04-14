@@ -17,115 +17,128 @@
 -->
 
 <html lang="en">
-<head>
-	<!--Required header junk-->
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Archimedes</title>
+  <head>
+    <!--Required header junk-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archimedes</title>
 
-	<!--Stylesheets-->
-	<style>
-		html, body {
-			padding: 0;
-			margin: 0;
-		}
+    <!--Stylesheets-->
+    <style>
+      html, body {
+      	padding: 0;
+      	margin: 0;
+      }
 
-		body {
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			padding: 50px;
-			color: #222222;
-			background-color: #dddddd;
-		}
-	</style>
+      body {
+      	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      	padding: 50px;
+      	color: #222222;
+      	background-color: #dddddd;
+      }
+    </style>
 
-	<!--Source Code-->
-	<source-code>
-		<!--Configuration-->
-		<script type="text/javascript">
-			console.log(`/archimedes/config ::: Loading config`);
+    <!--Source Code-->
+    <source-code>
+      <!--Configuration-->
+      <script type="text/javascript">
+        console.log(`/archimedes/config ::: Loading config`);
 
-			const config = {
-				updateURL:"https://codelikecraze.github.io/archimedes/index.html"
-			};
+        const config = {
+          updateURL: "https://codelikecraze.github.io/archimedes/index.html",
+        };
 
-			window.config = config;
-		</script>
+        window.config = config;
+      </script>
 
-		<!--Helper Functions-->
-		<script type="text/javascript">
-			// Hook errors
-			window.onerror = (error) => {
-				alert(`It looks like we ran into an error! :(\n${error.toString()}`);
-			}
+      <!--Helper Functions-->
+      <script type="text/javascript">
+        // Hook errors
+        window.onerror = (error) => {
+          alert(`It looks like we ran into an error! :(\n${error.toString()}`);
+        };
 
-			console.log = alert;
+        console.log = alert;
 
-			// Asynchronously fetches the text from a given url
-			async function AHFetchText(url) {
-				try {
-					console.log(`/archimedes/helpers ::: Downloading URL ${url}`);
-			
-					const response = await fetch(url, {cache: "reload"});
+        // Asynchronously fetches the text from a given url
+        async function AHFetchText(url) {
+          try {
+            console.log(`/archimedes/helpers ::: Downloading URL ${url}`);
 
-					const responseAsText = await response.text();
+            const response = await fetch(url, { cache: "reload" });
 
-					return responseAsText;
-				} catch {
-					alert(`Darn :(\nIt looks like we couldn't download the url "${url}"`);
-					throw new Error(":(");
-				}
-			}
+            const responseAsText = await response.text();
 
-			// Downloads a text file to the users PC.
-			async function AHDownloadText(text,name="output.txt") {
-				console.log(`/archimedes/helpers ::: Saving file`);
-		
-				// create a blob
-				const blob = new Blob()
+            return responseAsText;
+          } catch {
+            alert(
+              `Darn :(\nIt looks like we couldn't download the url "${url}"`
+            );
+            throw new Error(":(");
+          }
+        }
 
-				// make url
-				const url = URL.createObjectURL(blob);
+        // Downloads a text file to the users PC.
+        async function AHDownloadText(text, name = "output.txt") {
+          try {
+            console.log(`/archimedes/helpers ::: Saving file`);
 
-				// construct a link that we pretend to click
-				const link = document.createElement("p");
-				link.href = url;
-				link.setAttribute('target', '_blank');
-				link.setAttribute('download', name);
+            // create a blob
+            const blob = new Blob();
 
-				// add link
-				document.body.appendChild(link);
+            // make url
+            const url = URL.createObjectURL(blob);
 
-				// click said link
-				link.click();
-			}
+            // construct a link that we pretend to click
+            const link = document.createElement("p");
+            link.href = url;
+            link.setAttribute("target", "_blank");
+            link.setAttribute("download", name);
 
-			// Normalizes the formatting of a file, for diffing purposes
-			function AHNormalizeFormatting(file) {
-				return Array.from(file).map(char => char.trim()).join("");
-			}
-		</script>
+            // add link
+            document.body.appendChild(link);
 
-		<!--Update Mechanism-->
-		<script type="text/javascript">
-			async function AUCheckForUpdates() {
-				console.log(`/archimedes/update ::: Checking for updates`);
+            // click said link
+            link.click();
+          } catch (error) {
+            alert(
+              `Darn :(\nWe couldn't save the file because "${error.toString()}"`
+            );
+            throw new Error(":(");
+          }
+        }
 
-				console.log(`/archimedes/update ::: Downloading source from online.`);
-				const githubSRC = await AHFetchText(config.updateURL);
+        // Normalizes the formatting of a file, for diffing purposes
+        function AHNormalizeFormatting(file) {
+          return Array.from(file)
+            .map((char) => char.trim())
+            .join("");
+        }
+      </script>
 
-				document.querySelector("#updateButton").addEventListener("click",async ()=>{
-					await AHDownloadText(githubSrc,"Archimedes.html");
-				});
-			}
+      <!--Update Mechanism-->
+      <script type="text/javascript">
+        async function AUCheckForUpdates() {
+          console.log(`/archimedes/update ::: Checking for updates`);
 
-			AUCheckForUpdates();
-		</script>
-	</source-code>
-</head>
-<body>
-	<h1>Archimedes</h1>
-	<h2>Your go-to place for chromebook hacking news.</h2>
-	<button id="updateButton">Update</button>
-</body>
+          console.log(`/archimedes/update ::: Downloading source from online.`);
+          const githubSRC = await AHFetchText(config.updateURL);
+
+          document
+            .querySelector("#updateButton")
+            .addEventListener("click", async () => {
+              await AHDownloadText(githubSrc, "Archimedes.html");
+            });
+        }
+
+        AUCheckForUpdates();
+      </script>
+    </source-code>
+  </head>
+  <body>
+    <h1>Archimedes</h1>
+    <h2>Your go-to place for chromebook hacking news.</h2>
+    <button id="updateButton">Update</button>
+  </body>
 </html>
