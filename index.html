@@ -71,7 +71,7 @@
 				const refreshToken = Math.random().toString().split(".").join("");
 
 				console.log(`/archimedes/update ::: Downloading source of self.`);
-				const mySRC = await AHFetchText(`/?cacheBreaker=${refreshToken}`);
+				const mySRC = await AHFetchText(`${window.location.href}?cacheBreaker=${refreshToken}`);
 
 				console.log(`/archimedes/update ::: Downloading source from online.`);
 				const githubSRC = await AHFetchText(config.updateURL + "?cacheBreaker=${refreshToken}");
