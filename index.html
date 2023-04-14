@@ -49,6 +49,18 @@
 
 				return responseAsText;
 			}
+
+			// Downloads a text file to the users PC.
+			async function AHDownloadText(text,name="output.txt") {
+				alert("FIXME: AHDownloadText is not implemented yet!\nAborting!");
+				
+				throw new Error("Not implemented");
+			}
+
+			// Normalizes the formatting of a file, for diffing purposes
+			function AHNormalizeFormatting(file) {
+				return Array.from(file).map(char => char.trim()).join("");
+			}
 		</script>
 
 		<!--Update Mechanism-->
@@ -67,7 +79,7 @@
 				alert(mySRC);
 				alert(githubSRC);
 
-				if (mySRC != githubSRC) {
+				if (AHNormalizeFormatting(mySRC) != AHNormalizeFormatting(githubSRC)) {
 					console.log(`/archimedes/update ::: Informing user of reccomended update`);
 				
 					alert("Update is reccomended!");
