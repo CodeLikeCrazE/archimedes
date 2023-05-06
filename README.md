@@ -1,4 +1,4 @@
-# Archimedes
+# Archimedes (this sucks ass and is abandoned)
 
 ## Scam Warning
 
